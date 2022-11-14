@@ -137,13 +137,20 @@ public class SecurePassword {
     private boolean checkString(String characterString) {
         /* to be implemented */
         int num = 0;
+        int count = 0;
         String letter =  characterString.substring(num, num+1);
-        for (int i = 0; i < password.length(); i++) {
-            if (letter.equals(password.substring(i,i++))) {
-                return true;
+        while (num < characterString.length()) {
+            if (count >= password.length()) {
+                num += 1;
+                letter = characterString.substring(num,num+1);
             } else {
-                num++;
-                letter=characterString.substring(num, num+1);
+                while (count < password.length()) {
+                    if (letter.equals(password.substring(count, count+1))) {
+                        return true;
+                    } else {
+                        count += 1;
+                    }
+                }
             }
         }
         return false;
